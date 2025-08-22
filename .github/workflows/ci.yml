@@ -14,6 +14,8 @@ jobs:
         run: vercel link --token=${{ secrets.VERCEL_TOKEN }} --yes && vercel env pull .env.local --token=${{ secrets.VERCEL_TOKEN }}
       - name: Pull Vercel project settings
         run: vercel pull --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Set NEXT_PUBLIC_TEST env variable
+        run: echo "NEXT_PUBLIC_TEST=20" >> .env.local
       - name: Build with Vercel
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Install Cypress
