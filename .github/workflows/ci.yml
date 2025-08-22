@@ -11,9 +11,9 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
       - name: Link local directory to vercel project and pull environment variables
-        run: vercel link && vercel env pull .env.local
+        run: vercel link --token=${{ secrets.VERCEL_TOKEN }} && vercel env pull .env.local --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build with Vercel
-        run: vercel build
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Install Cypress
         run: npx cypress install
       - name: Run Cypress tests
