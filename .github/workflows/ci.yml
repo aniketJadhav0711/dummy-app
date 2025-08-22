@@ -1,0 +1,22 @@
+name: CI/CD Pipeline
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Project Dependencies
+        run: npm ci
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+      - name: Link local directory to vercel project and pull environment variables
+        run: vercel link && vercel env pull .env.local
+      - name: Build with Vercel
+        run: vercel build
+      - name: Install Cypress
+        run: npx cypress install
+      - name: Run Cypress tests
+        run: npx cypress run
+      - name: Deploy to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
