@@ -21,6 +21,6 @@ jobs:
       - name: Install start-server-and-test
         run: npm install start-server-and-test
       - name: Run Cypress tests
-        run: npx start-server-and-test dev http://localhost:3000 cypress:run
+        run: npx start-server-and-test start http://localhost:3000 cypress:run
       - name: Deploy to Vercel
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
