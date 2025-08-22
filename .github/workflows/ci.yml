@@ -15,12 +15,12 @@ jobs:
       - name: Pull Vercel project settings
         run: vercel pull --yes --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build with Vercel
-        run: NEXT_PUBLIC_TEST=20 vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Install Cypress
         run: npx cypress install
       - name: Install start-server-and-test
         run: npm install start-server-and-test
       - name: Run Cypress tests
-        run: npx start-server-and-test start http://localhost:3000 cypress:run
+        run: NEXT_PUBLIC_TEST=20 npx start-server-and-test dev http://localhost:3000 cypress:run
       - name: Deploy to Vercel
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
